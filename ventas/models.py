@@ -21,6 +21,7 @@ class Producto(models.Model):
     descripcion = models.CharField(max_length=255, unique=True, null=False)
     imagen = models.ImageField(upload_to='productos', null=True, blank=True)
     costo = models.DecimalField(max_digits=15, decimal_places=2, null=False)
+    precio = models.DecimalField(max_digits=15, decimal_places=2, null=False, default=0, blank=True )
     cantidad = models.DecimalField(max_digits=15, decimal_places=2, null=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now_add=True)

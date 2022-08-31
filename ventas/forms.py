@@ -1,8 +1,7 @@
 __author__ = 'Usuario'
 # crear formualarios basados en modelos para personalizarlos
 from django import forms
-from ventas.models import Cliente
-
+from ventas.models import Cliente, Producto
 class AddClienteForm(forms.ModelForm):
     class Meta:
         model = Cliente
@@ -28,3 +27,21 @@ class EditarClienteForm(forms.ModelForm):
             'telefono': forms.TextInput(attrs={'id':'telefono_editar'}),
         }
 
+
+# *******************************************
+# PRODUCTOS
+# *******************************************
+
+class AddProductoForm(forms.ModelForm):
+    class Meta:
+        model = Producto
+        fields = ('codigo','descripcion', 'imagen', 'costo', 'precio', 'cantidad')  # tupla para mostrar
+        labels = {
+            'codigo': 'Cod. Barras',
+            'descripcion': 'Descripcion del producto',
+            'imagen': 'Imagen:)',
+            'costo': 'Costo Gs:)',
+            'precio': 'Precio Gs:)',
+            'cantidad': 'Cantidad:)',
+
+        }
