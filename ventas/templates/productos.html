@@ -16,8 +16,8 @@
                 <h5 class="modal-title text-dark">Agregar nuevo</h5>
             </div>
             <div class="modal-body bg-dark text-white">
-                <form method="POST" action="{% url 'AddCliente' %}" enctype="multipart/form-data">{% csrf_token %}
-                    {% for field in form_personal %}
+                <form method="POST" action="{% url 'AddProducto' %}" enctype="multipart/form-data">{% csrf_token %}
+                    {% for field in form_add %}
                     <p>{{field.label}} <br>
                         {{field|add_class:"form-control text-dark"}}</p>
                     {% for error in field.errors %}
@@ -131,7 +131,7 @@
                         <td>{{i.costo}}</td>
                         <td>{{i.precio}}</td>
                         <td>{{i.cantidad}}</td>
-                        {% if i.imagen.url %}
+                        {% if i.imagen %}
                         <td><img src="{{i.imagen.url}}" alt="Error" width="100" height="100"></td>
                         {% else %}
                         <td></td>
