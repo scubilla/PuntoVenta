@@ -48,7 +48,7 @@
                 <h5 class="modal-title text-dark">Editar</h5>
             </div>
             <div class="modal-body bg-dark text-white">
-                <form method="POST" action="{% url 'EditCliente' %}" enctype="multipart/form-data">{% csrf_token %}
+                <form method="POST" action="{% url 'EditProducto' %}" enctype="multipart/form-data">{% csrf_token %}
                     <input type="hidden" id="id_personal_editar" name="id_personal_editar">
                     {% for field in form_editar %}
                     <p> {{field.label}} <br>
@@ -82,7 +82,7 @@
             </div>
             <div class="modal-body bg-dark text-white">
                 <p class="labelmodal">¿Estás seguro?</p>
-                <form method="POST" action="{% url 'DeleteCliente' %}">{% csrf_token %}
+                <form method="POST" action="{% url 'DeleteProducto' %}">{% csrf_token %}
                     <input type="hidden" id="id_personal_eliminar" name="id_personal_eliminar">
             </div>
             <div class="modal-footer bg-dark text-white">
@@ -115,11 +115,12 @@
                 <thead>
                     <tr>
                         <th># ID</th>
+                        <th>Codigo</th>
                         <th>Descripción</th>
+                        <th>Imagen</th>
                         <th>Costo</th>
                         <th>Precio</th>
-                        <th>Cant.</th>
-                        <th>Imagen</th>
+                        <th>Cantidad</th>
                         <th>Opciones</th>
                     </tr>
                 </thead>
@@ -127,17 +128,18 @@
                     {% for i in productos %}
                     <tr>
                         <td>{{i.id}}</td>
+                        <td>{{i.codigo}}</td>
                         <td>{{i.descripcion}}</td>
-                        <td>{{i.costo}}</td>
-                        <td>{{i.precio}}</td>
-                        <td>{{i.cantidad}}</td>
                         {% if i.imagen %}
                         <td><img src="{{i.imagen.url}}" alt="Error" width="100" height="100"></td>
                         {% else %}
                         <td></td>
                         {% endif %}
+                        <td>{{i.costo}}</td>
+                        <td>{{i.precio}}</td>
+                        <td>{{i.cantidad}}</td>
                         <td>
-                            <button onclick="" class="btn btn-dark-outline btn-sm" data-toggle="modal"
+                            <button onclick="editarProducto('{{i.id}}','{{i.codigo}}','{{i.descripcion}}', '{{i.imagen}}','{{i.costo}}','{{i.precio}}','{{i.cantidad}}')"  class="btn btn-dark-outline btn-sm" data-toggle="modal"
                                 href="#EditarPersonalModal"><img src="{% static 'index/img/editar.png' %}" alt="Error"
                                     width="30"></button>
                             <button onclick="" class="btn btn-dark-outline btn-sm"
