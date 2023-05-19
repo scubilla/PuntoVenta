@@ -1,6 +1,6 @@
 from django.contrib import admin
 # from .models import Cliente, Producto, Venta, DetVenta
-from .models import Cliente, Producto
+from .models import Cliente, Producto, Empresa
 
 # Register your models here.
 
@@ -57,3 +57,15 @@ class VentaAdmin(admin.ModelAdmin):
 
 admin.site.register(Venta, VentaAdmin)
 '''
+
+class EmpresaAdmin(admin.ModelAdmin):
+    list_display = ('nombre','domicilio','telefono')
+    search_fields = []
+    readonly_fields = ('created','updated')
+    filter_horizontal = ()
+    list_filter = ()
+    fieldsets = ()
+
+admin.site.register(Empresa,EmpresaAdmin)
+
+

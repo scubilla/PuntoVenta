@@ -70,20 +70,19 @@ def productos_view(request):
     form_editar = EditarClienteForm()
     '''
     productos = Producto.objects.all()
-    form_personal = AddProductoForm()
-    form_editar = AddProductoForm()
+    form_add = AddProductoForm()
+    form_editar = EditarProductoForm()
     context = {
         'productos': productos,
-        'form_add': form_personal,
-        'form_editar': form_editar,
-
+        'form_add': form_add,
+        'form_editar': form_editar
     }
     return render(request, 'productos.html', context)
 
 def add_producto_view(request):
     if request.POST:
         form  = AddProductoForm(request.POST, request.FILES)
-        if form.is_valid:
+        if form.is_valid():
             try:
                 form.save()
             except:
@@ -93,9 +92,9 @@ def add_producto_view(request):
 
 def edit_producto_view(request):
     if request.POST:
-        producto = Producto.objects.get(pk=request.POST.get('id_personal_editar'))
+        producto = Producto.objects.get(pk=request.POST.get('id_producto_editar'))
         form = EditarProductoForm(request.POST, request.FILES, instance= producto)
-        if form.is_valid:
+        if form.is_valid():
             form.save()
 
     return redirect('Productos')
@@ -103,7 +102,7 @@ def edit_producto_view(request):
 
 def delete_producto_view(request):
     if request.POST:
-        producto = Producto.objects.get(pk=request.POST.get('id_personal_eliminar'))
+        producto = Producto.objects.get(pk=request.POST.get('id_producto_eliminar'))
         producto.delete()
 
     return redirect('Productos')
@@ -142,6 +141,14 @@ class add_ventas(ListView):
             data['error'] = str(e)
 
         return JsonResponse(data, safe=False)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["productos_lista"] = Producto.objects.all()
+        context["clientes_lista"] = Cliente.objects.all()
+
+        return context
+
 
 
 def export_pdf_view(request, id, iva):

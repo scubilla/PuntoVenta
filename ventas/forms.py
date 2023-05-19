@@ -38,9 +38,9 @@ class AddProductoForm(forms.ModelForm):
         model = Producto
         fields = ('codigo', 'descripcion','imagen', 'costo', 'precio', 'cantidad')  # tupla para mostrar
         labels = {
-            'codigo': 'Cod. Barras',
-            'descripcion': 'Descripcion del producto',
-            'imagen': 'Imagen',
+            'codigo': 'Cod. Barras:',
+            'descripcion': 'Descripcion del producto:',
+            'imagen': 'Imagen:',
             'costo': 'Costo Gs:',
             'precio': 'Precio Gs:',
             'cantidad': 'Cantidad:',
@@ -54,19 +54,17 @@ class EditarProductoForm(forms.ModelForm):
         labels = {
             'codigo': 'Codigo/Barras:',
             'descripcion': 'Nombre:',
-            'imagen': 'Imagen',
-            'costo': 'Costo Compra:',
-            'precio': 'Precio Venta:',
+            'imagen': 'Imagen:',
+            'costo': 'Costo Gs.:',
+            'precio': 'Precio Gs.:',
             'cantidad': 'Existencia:',
-
         }
         widgets = {
             'codigo': forms.TextInput(attrs={'id':'codigo_editar'}),
             'descripcion': forms.TextInput(attrs={'id':'descripcion_editar'}),
-            'imagen': forms.ClearableFileInput(attrs={'id':'imagen_editar'}),
-            'costo': forms.NumberInput(attrs={'id':'costo_editar'}),
-            'precio': forms.NumberInput(attrs={'id':'precio_editar'}),
-            'cantidad': forms.NumberInput(attrs={'id':'cantidad_editar'}),
+            'costo': forms.TextInput(attrs={'id':'costo_editar'}),
+            'precio': forms.TextInput(attrs={'id':'precio_editar'}),
+            'cantidad': forms.TextInput(attrs={'id':'cantidad_editar'}),
 
         }
 
